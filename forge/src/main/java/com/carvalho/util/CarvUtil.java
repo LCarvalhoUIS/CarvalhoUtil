@@ -9,6 +9,7 @@ package com.carvalho.util;
 
 
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -75,60 +76,20 @@ public class CarvUtil
     	enableDiamondSmelting(config.get(Configuration.CATEGORY_GENERAL,"Enable Diamond Smelting Recipes",true).getBoolean(true));
     	//Checks for tool setting
     	enableToolSmelting(config.get(Configuration.CATEGORY_GENERAL,"Enable Tool Smelting Recipes",true).getBoolean(true));
-    	
+    	//Checks for wood backwards setting
+    	enableWoodBackwardsRecipes(config.get(Configuration.CATEGORY_GENERAL,"Enable Backwards Plank Recipes",true).getBoolean(true));
+    	//Checks for misc recipes
+    	enableMiscRecipes(config.get(Configuration.CATEGORY_GENERAL,"Enable Misc Recipes",true).getBoolean(true));
+    	enableArmorSmelting(config.get(Configuration.CATEGORY_GENERAL,"Enable Armor Smelting",true).getBoolean(true));
+
     	config.save();
+ 
     	
     //	testItem=new Item().setCreativeTab(CarvTab).setUnlocalizedName("TestItem");
     	//GameRegistry.registerItem(testItem,"TestItem");
     	
     	//testBlock=new Block(Material).setCreativeTab(CarvTab).
-    	
-    	
-    	//Template for adding a recipe
-    	/*GameRegistry.addRecipe(new ItemStack(Blocks.obsidian), new Object[]{
-            "AAA",
-            "AAA",
-            "   ",
-            'A', Items.arrow
-        });*/
-    	/*(Adds a way to convert items to their ingot forms by smelting
-    	//For balance reasons only undamaged items may do so and no exp will be given
-    	//Items included:
-    	//Iron: Anvil, Cauldron, Compass, Iron Door, Hopper, 
-    	 * 		Minecart, Bucket, Iron Bars, Compass, Map, Activator Rail,
-    	 * 		Detetor Rail, Piston, Sticky Piston, Rail, 
-    	 * Gold: Clock, Golden Apple
-    	 * 
-    	 * Diamond: Enchanting Table, Jukebox, Firework Charge (All variants)
-    	 * 
-    	 * See next section for breakable implementation
-    	 */
-    	//Iron
-    	
-
-    	
-    	
-    	//Gold
-    	
-    	
-    	//Diamond
-    	
-    	
-    	/*Breakable item smelting
-    	//Only fully untouched tools may be smelted
-    	//Items included:
-    	//Iron: Flint and steel
-    	 * Gold: 
-    	 * 
-    	 * Diamond: 
-    	 * 
-    	 * 
-    	 */
-    	
-    	/*Shaped recipes
-    	 * Feather and Leater Beds
-    	 */
-    	
+    
     	
     	
 		
@@ -136,7 +97,10 @@ public class CarvUtil
 }
     
     
-    
+    /**
+     * Initializer. Currently unused
+     * @param event The initialization evnent
+     */
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
@@ -144,7 +108,10 @@ public class CarvUtil
     }
     
     
-    
+    /**
+     * Post initializer. Currently unused
+     * @param event The post-initialization event
+     */
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
@@ -153,7 +120,10 @@ public class CarvUtil
     /**Allows the smelting of iron related non-tools back to their raw material, if the item
      * has not been used. Does not give experience points for balance reasons.
      * 
-     * 
+     * Anvil, Cauldron, Compass, Iron Door, Hopper, 
+     * Minecart, Bucket, Iron Bars, Compass, Map, Activator Rail,
+     * Detetor Rail, Piston, Sticky Piston, Rail, Tripwire Hook
+     * Trapped Chest, Heavy Weighted Pressure Plate
      * @param setting Whether or not to enable this feature
      */
     public void enableIronSmelting(boolean setting)
@@ -186,7 +156,7 @@ public class CarvUtil
     
     /**Allows the smelting of gold related non-tools back to their raw material, if the item
      * has not been used. Does not give experience points for balance reasons.
-     * 
+     * Includes: Clock, Golden Apple
      * 
      * @param setting Whether or not to enable this feature
      */
@@ -201,7 +171,7 @@ public class CarvUtil
     }
     /**Allows the smelting of diamond related non-tools back to their raw material, if the item
      * has not been used. Does not give experience points for balance reasons.
-     * 
+     * Includes: Enchanting Table, Jubebox, Firework Charge (All variants)
      * 
      * @param setting Whether or not to enable this feature
      */
@@ -245,6 +215,103 @@ public class CarvUtil
     	}
     }
     
+    /**
+     * Allows the shapeless backwards crafting of wood plank and stick related things
+     * Things included:
+     * 
+     * @param setting Whether or not to enable this feature
+     */
+    public void enableWoodBackwardsRecipes(boolean setting)
+    {
+    	if(setting)
+    	{
+    		
+    	}
+    	
+    }
+    /**
+     * Adds misc. recipes, both crafting and smelting.
+     * Includes: 
+     * Shaped:
+     * Leather and Feather beds
+     * Iron, Gold, and Diamond Horse Armor
+     * Shapeless:
+     * Water Bucket to Bucket
+     * Milk Bucket to Bucket
+     * Lava Bucket to Bucket
+     * Any Potion/Bottle to Empty Bottle
+     * Empty Bottle plus Head to Bottle o' Enchanting
+     * Smelt:
+     * 3 Rotten Flesh to 1 Leather 
+     * 
+     * @param setting Whether or not to enable this feature
+     */
+    public void enableMiscRecipes(boolean setting)
+    {
+    	if(setting)
+    	{
+    	//Shaped
+    		//Beds
+    		GameRegistry.addRecipe(new ItemStack(Items.bed), "xxx","yyy", 'x',Items.leather, 'y',Blocks.planks);
+    		GameRegistry.addRecipe(new ItemStack(Items.bed), "xxx","xxx","yyy", 'x',Items.feather, 'y',Blocks.planks);
+    		//Horse armor
+    		GameRegistry.addRecipe(new ItemStack(Items.iron_horse_armor), "x  ","xyx","xxx", 'x',Items.iron_ingot, 'y',Blocks.wool);
+    		GameRegistry.addRecipe(new ItemStack(Items.golden_horse_armor), "x  ","xyx","xxx", 'x',Items.gold_ingot, 'y',Blocks.wool);
+    		GameRegistry.addRecipe(new ItemStack(Items.diamond_horse_armor), "x  ","xyx","xxx", 'x',Items.diamond, 'y',Blocks.wool);
+    	//Shapeless
+    		//Buckets & Bottles
+    		GameRegistry.addShapelessRecipe(new ItemStack(Items.bucket),Items.water_bucket);
+    		GameRegistry.addShapelessRecipe(new ItemStack(Items.bucket),Items.lava_bucket);
+    		GameRegistry.addShapelessRecipe(new ItemStack(Items.bucket),Items.milk_bucket);
+    		GameRegistry.addShapelessRecipe(new ItemStack(Items.glass_bottle),Items.potionitem);
+    		//Bottle o' Enchanting
+    		GameRegistry.addShapelessRecipe(new ItemStack(Items.experience_bottle),Items.glass_bottle,Items.skull);
+    	//Smelt
+    		GameRegistry.addSmelting(new ItemStack(Items.rotten_flesh,3),new ItemStack(Items.leather),0.0f);
+
+    	}
+    	
+    }
+    /**Allows the smelting of armor back to their raw material, if the item
+     * has not been used. Does not give experience points for balance reasons.
+     * Armor included:
+     * Helmet, Chestplate, Leggings, Boots (Leather, Iron, Gold, Diamond),
+     *  Horse Armor (Iron, Gold, Diamond)
+     * 
+     * @param setting Whether or not to enable this feature
+     */
+    public void enableArmorSmelting(boolean setting)
+    {
+    	if(setting)
+    	{
+    		//Helmets
+    		GameRegistry.addSmelting(new ItemStack(Items.leather_helmet,1,0),new ItemStack(Items.leather,5),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.iron_helmet,1,0),new ItemStack(Items.iron_ingot,5),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.golden_helmet,1,0),new ItemStack(Items.gold_ingot,5),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.diamond_helmet,1,0),new ItemStack(Items.diamond,5),0.0f);
+    		//Chestplates
+    		GameRegistry.addSmelting(new ItemStack(Items.leather_chestplate,1,0),new ItemStack(Items.leather,8),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.iron_chestplate,1,0),new ItemStack(Items.iron_ingot,8),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.golden_chestplate,1,0),new ItemStack(Items.gold_ingot,8),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.diamond_chestplate,1,0),new ItemStack(Items.diamond,8),0.0f);
+    		//Leggings
+    		GameRegistry.addSmelting(new ItemStack(Items.leather_leggings,1,0),new ItemStack(Items.leather,7),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.iron_leggings,1,0),new ItemStack(Items.iron_ingot,7),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.golden_leggings,1,0),new ItemStack(Items.gold_ingot,7),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.diamond_leggings,1,0),new ItemStack(Items.diamond,7),0.0f);
+    		//Boots
+    		GameRegistry.addSmelting(new ItemStack(Items.leather_boots,1,0),new ItemStack(Items.leather,4),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.iron_boots,1,0),new ItemStack(Items.iron_ingot,4),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.golden_boots,1,0),new ItemStack(Items.gold_ingot,4),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.diamond_boots,1,0),new ItemStack(Items.diamond,4),0.0f);
+    		//Horse armor
+    		GameRegistry.addSmelting(new ItemStack(Items.iron_horse_armor,1,0),new ItemStack(Items.iron_ingot,6),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.golden_horse_armor,1,0),new ItemStack(Items.gold_ingot,6),0.0f);
+    		GameRegistry.addSmelting(new ItemStack(Items.diamond_horse_armor,1,0),new ItemStack(Items.diamond,6),0.0f);
+    		
+    	}
+    	
+    }
     
 }
 
