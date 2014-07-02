@@ -9,11 +9,20 @@ package com.carvalho.util;
 
 
 
+import com.carvalho.util.gui.ControlPanelFrame;
+import com.carvalho.util.proxy.CommonProxy;
+import com.carvalho.util.recipes.MiscRecipes;
+import com.carvalho.util.recipes.ShapelessRecipes;
+import com.carvalho.util.recipes.SmeltingRecipes;
+
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -28,7 +37,15 @@ import net.minecraftforge.common.config.*;
 public class CarvUtil
 {
     public static final String MODID = "CarvalhoUtil";
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.2";
+    
+    
+    @SidedProxy(clientSide="com.carvalho.util.proxy.ClientProxy",
+    			serverSide="com.carvalho.util.proxy.CommonProxy")
+   public static CommonProxy proxy;
+   
+   @Instance(MODID)
+   public static CarvUtil instance;
     
     
     /**
@@ -55,14 +72,20 @@ public class CarvUtil
 	
     @EventHandler
     public void preinit(FMLPreInitializationEvent event)
-
     {
+    	//Begin test area
+    	
+    	//End test area
+    	
     	/**
     	 * The config file. Named after the mod
     	 */
     	Configuration config=new Configuration(event.getSuggestedConfigurationFile());
     	config.load();
     	
+    	//Gets the ID for the test block
+    	//CarvUtil.block.setBlockID
+    
     	//testBlockID=config.get(Configuration.CATEGORY_GENERAL,"Test block ID",200).getInt();
     	//Checks for Iron item setting
     	SmeltingRecipes.enableIronSmelting(config.get(Configuration.CATEGORY_GENERAL,"Enable Iron Smelting Recipes",true).getBoolean(true));
@@ -85,11 +108,6 @@ public class CarvUtil
 
     	config.save();
  
-    	
-    //	testItem=new Item().setCreativeTab(CarvTab).setUnlocalizedName("TestItem");
-    	//GameRegistry.registerItem(testItem,"TestItem");
-    	
-    	//testBlock=new Block(Material).setCreativeTab(CarvTab).
     
     	
     	
@@ -105,7 +123,9 @@ public class CarvUtil
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	
+    
+    	proxy.registerProxies();
+   
     	
     	
     }
@@ -118,12 +138,17 @@ public class CarvUtil
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+     	ControlPanelFrame frame= new ControlPanelFrame();
+     	
+     	
     	
     }
     public void enableMiscOptions(boolean setting)
     {
     	if(setting)
     	{
+    		
+    	
     		
     	}
     }

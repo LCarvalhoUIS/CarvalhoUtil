@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
+  "modid": "carvalhoutil",
+  "name": "Carvalho Util",
+  "description": "UIS project",
+  "version": "1.2",
+  "mcversion": "1.7.2",
+  "url": "https://github.com/LCarvalhoUIS/CarvalhoUtil",
   "updateUrl": "",
-  "authors": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authors": ["Lucas Carvalho"],
+  "credits": "The Forge folks for their great API, and the University of Illinois for sponsoring this",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

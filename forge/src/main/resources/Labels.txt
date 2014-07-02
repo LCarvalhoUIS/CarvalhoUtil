@@ -1,0 +1,3 @@
+Item Uses Left
+EXP Points
+RNG Seed

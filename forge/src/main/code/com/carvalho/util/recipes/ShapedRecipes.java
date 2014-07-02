@@ -3,7 +3,7 @@
  * @version 1.1
  * 
  */
-package com.carvalho.util;
+package com.carvalho.util.recipes;
 
 /**
  *Adds shaped recipes.
