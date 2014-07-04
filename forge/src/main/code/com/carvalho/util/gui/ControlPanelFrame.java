@@ -1,10 +1,12 @@
+/** Carvalho Util
+ * @author Lucas Carvalho
+ * @version 1.2
+ * 
+ */
+
 package com.carvalho.util.gui;
 
-import java.awt.Dimension;
-import java.awt.Insets;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * An external control panel. Part of a project fullfillment requirement to
@@ -13,9 +15,10 @@ import javax.swing.JPanel;
  *
  */
 
+@SuppressWarnings("serial")
 public class ControlPanelFrame extends JFrame {
 
-	private JPanel contentPane;
+	
 
 
 
@@ -23,14 +26,16 @@ public class ControlPanelFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ControlPanelFrame() {
+		//Hides, does not stop the program itself
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		//setBounds(100, 100, 450, 300);
 		
-		MainPanel frame=new MainPanel();
+	
+		MainPanel panel=new MainPanel();
 		
 		
 		
-		setContentPane(frame);
+		setContentPane(panel);
 		pack();
 		
 		setVisible(true);

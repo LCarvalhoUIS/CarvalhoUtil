@@ -1,6 +1,6 @@
 /** Carvalho Util
  * @author Lucas Carvalho
- * @version 1.1
+ * @version 1.2
  * 
  */
 
@@ -16,7 +16,6 @@ import com.carvalho.util.recipes.ShapelessRecipes;
 import com.carvalho.util.recipes.SmeltingRecipes;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.Mod;
@@ -39,7 +38,7 @@ public class CarvUtil
     public static final String MODID = "CarvalhoUtil";
     public static final String VERSION = "1.2";
     
-    
+    //Declares the client and server side proxies
     @SidedProxy(clientSide="com.carvalho.util.proxy.ClientProxy",
     			serverSide="com.carvalho.util.proxy.CommonProxy")
    public static CommonProxy proxy;
@@ -55,14 +54,10 @@ public class CarvUtil
 		
 		@Override
 		public Item getTabIconItem() {
-			// TODO Auto-generated method stub
 			return Items.iron_pickaxe; //Placeholder icon
 		}
 	};
-	//public static Item testItem;
-	//public static Block testBlock;
 	
-	//public static int testBlockID;
     
 	
 	/**
@@ -83,10 +78,7 @@ public class CarvUtil
     	Configuration config=new Configuration(event.getSuggestedConfigurationFile());
     	config.load();
     	
-    	//Gets the ID for the test block
-    	//CarvUtil.block.setBlockID
-    
-    	//testBlockID=config.get(Configuration.CATEGORY_GENERAL,"Test block ID",200).getInt();
+    	
     	//Checks for Iron item setting
     	SmeltingRecipes.enableIronSmelting(config.get(Configuration.CATEGORY_GENERAL,"Enable Iron Smelting Recipes",true).getBoolean(true));
     	//Checks for Gold item setting
@@ -117,8 +109,8 @@ public class CarvUtil
     
     
     /**
-     * Initializer. Currently unused
-     * @param event The initialization evnent
+     * Initializer. Registers the proxies
+     * @param event The initialization event
      */
     @EventHandler
     public void init(FMLInitializationEvent event)
@@ -138,20 +130,13 @@ public class CarvUtil
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-     	ControlPanelFrame frame= new ControlPanelFrame();
+     	@SuppressWarnings("unused")
+		ControlPanelFrame frame= new ControlPanelFrame();
      	
      	
     	
     }
-    public void enableMiscOptions(boolean setting)
-    {
-    	if(setting)
-    	{
-    		
-    	
-    		
-    	}
-    }
+    
     
    
 }

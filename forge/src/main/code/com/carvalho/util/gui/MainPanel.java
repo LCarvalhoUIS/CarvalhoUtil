@@ -1,18 +1,27 @@
+/** Carvalho Util
+ * @author Lucas Carvalho
+ * @version 1.2
+ * 
+ */
 package com.carvalho.util.gui;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
+/**
+ * Primary JPanel of the frame.
+ * @author Lucas Carvalho
+ *
+ */
+@SuppressWarnings("serial")
 public class MainPanel extends JPanel {
 
-	private JPanel contentPane;
+	
 	
 	/**
 	 * Holds the category labels.
@@ -37,6 +46,7 @@ public class MainPanel extends JPanel {
 			{
 				categories.add(new DataRow(currentLine));
 			}
+			reader.close();
 		} catch (Exception e) {
 			
 			e.printStackTrace();

@@ -1,6 +1,6 @@
 /** Carvalho Util
  * @author Lucas Carvalho
- * @version 1.1
+ * @version 1.2
  * 
  */
 package com.carvalho.util;
@@ -36,11 +36,14 @@ public class EnhancedDrops {
 	{
 		//Gets the source of damage and finds the looting modifier
 		Entity source=event.source.getSourceOfDamage();
-		int lootingModifier=EnchantmentHelper.getLootingModifier((EntityLivingBase) source);
 		//Finds out if the entity was killed by a player
 		boolean wasKilledByPlayer=false;
+		int lootingModifier=0;
 		if(source instanceof EntityPlayer)
+		{
 			wasKilledByPlayer=true;
+			lootingModifier=EnchantmentHelper.getLootingModifier((EntityLivingBase) source);
+		}
 		
 		//For horses
 		if(event.entity instanceof EntityHorse)
