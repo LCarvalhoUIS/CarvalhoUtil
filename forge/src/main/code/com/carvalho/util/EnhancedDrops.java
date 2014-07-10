@@ -18,6 +18,8 @@ import net.minecraft.init.Items;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 
+
+
 /**
  * Adds different mob drops.
  * Current drops:
@@ -43,7 +45,7 @@ public class EnhancedDrops {
 		{
 			wasKilledByPlayer=true;
 			lootingModifier=EnchantmentHelper.getLootingModifier((EntityLivingBase) source);
-		}
+			}
 		
 		//For horses
 		if(event.entity instanceof EntityHorse)

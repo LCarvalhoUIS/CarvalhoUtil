@@ -10,7 +10,8 @@ package com.carvalho.util;
 
 
 import com.carvalho.util.gui.ControlPanelFrame;
-import com.carvalho.util.proxy.CommonProxy;
+import com.carvalho.util.networking.ClientPacketHandler;
+import com.carvalho.util.networking.ServerPacketHandler;
 import com.carvalho.util.recipes.MiscRecipes;
 import com.carvalho.util.recipes.ShapelessRecipes;
 import com.carvalho.util.recipes.SmeltingRecipes;
@@ -19,12 +20,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.FMLEventChannel;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.*;
 
@@ -38,10 +40,20 @@ public class CarvUtil
     public static final String MODID = "CarvalhoUtil";
     public static final String VERSION = "1.2";
     
+    //Verify the packets come from my channel
+    public final static int PACKET_TYPE_ENTITY_SYNC = 2;
+    public final static int PACKET_TYPE_C2S_TEST = 2;
+
+    
+    /**
+     * THe name for the mod network channel
+     */
+    public static final String networkChannelName="CarvUtil";
+    public static FMLEventChannel channel;
     //Declares the client and server side proxies
-    @SidedProxy(clientSide="com.carvalho.util.proxy.ClientProxy",
-    			serverSide="com.carvalho.util.proxy.CommonProxy")
-   public static CommonProxy proxy;
+   /* @SidedProxy(clientSide="com.carvalho.util.networking.ClientProxy",
+    			serverSide="com.carvalho.util.networking.CommonProxy")*/
+  
    
    @Instance(MODID)
    public static CarvUtil instance;
@@ -64,12 +76,12 @@ public class CarvUtil
 	 * The preinitializer. Loads the config file
 	 * @param event The preinitialization event
 	 */
-	
     @EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
     	//Begin test area
-    	
+    	@SuppressWarnings("unused")
+		ControlPanelFrame frame= new ControlPanelFrame();
     	//End test area
     	
     	/**
@@ -115,9 +127,11 @@ public class CarvUtil
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    
-    	proxy.registerProxies();
-   
+    	//Starts the network channel
+    	CarvUtil.channel=NetworkRegistry.INSTANCE.newEventDrivenChannel(CarvUtil.networkChannelName);
+    	CarvUtil.channel.register(new ServerPacketHandler());
+    	CarvUtil.channel.register(new ClientPacketHandler());
+    	
     	
     	
     }
@@ -130,8 +144,7 @@ public class CarvUtil
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-     	@SuppressWarnings("unused")
-		ControlPanelFrame frame= new ControlPanelFrame();
+     	
      	
      	
     	

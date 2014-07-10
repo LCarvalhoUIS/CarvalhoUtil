@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
@@ -36,7 +37,7 @@ public class MainPanel extends JPanel {
 	
 		categories=new ArrayList<JPanel>();
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		
+		setBorder(BorderFactory.createMatteBorder(5,5,5,5,java.awt.Color.white));
 		
 		try {
 			//Opens the file with the labels
