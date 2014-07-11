@@ -15,6 +15,7 @@ import com.carvalho.util.networking.ServerPacketHandler;
 import com.carvalho.util.recipes.MiscRecipes;
 import com.carvalho.util.recipes.ShapelessRecipes;
 import com.carvalho.util.recipes.SmeltingRecipes;
+import com.carvalho.util.serverside.CalculateItemCommand;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -25,10 +26,12 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.*;
+import net.minecraftforge.event.world.ChunkDataEvent.Load;
 
 
 /** The main mod class.
@@ -43,7 +46,7 @@ public class CarvUtil
     //Verify the packets come from my channel
     public final static int PACKET_TYPE_ENTITY_SYNC = 2;
     public final static int PACKET_TYPE_C2S_TEST = 2;
-
+    public final static int PACKET_TYPE_WORLD_SYNC = 2;
     
     /**
      * THe name for the mod network channel
@@ -80,6 +83,7 @@ public class CarvUtil
     public void preinit(FMLPreInitializationEvent event)
     {
     	//Begin test area
+    	
     	@SuppressWarnings("unused")
 		ControlPanelFrame frame= new ControlPanelFrame();
     	//End test area
@@ -149,8 +153,28 @@ public class CarvUtil
      	
     	
     }
+    /**
+     * Client side loader
+     * Registers any renderers
+     * @param event
+     */
+    public void Load(FMLInitializationEvent event)
+    {
+    	//Empty for now
+    }
     
+    	
     
+    /**
+     * Server side loader
+     * Registers any server side commands
+     * @param event
+     */
+    @EventHandler
+    public void serverLoad(FMLServerStartingEvent event)
+    {
+      event.registerServerCommand(new CalculateItemCommand());
+    }
    
 }
 
