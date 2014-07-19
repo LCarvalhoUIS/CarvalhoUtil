@@ -13,7 +13,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 /**
@@ -41,7 +40,7 @@ public class ServerPacketHandler {
 		
 		NetHandlerPlayServer theNetHandlerPlayServer = (NetHandlerPlayServer)event.handler;
 		thePlayer=theNetHandlerPlayServer.playerEntity;
-		MinecraftServer server=MinecraftServer.getServer();
+		//MinecraftServer server=MinecraftServer.getServer();
 		
 		if(channelName.equals(CarvUtil.networkChannelName))
 		{

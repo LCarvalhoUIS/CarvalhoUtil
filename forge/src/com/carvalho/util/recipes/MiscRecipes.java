@@ -48,11 +48,11 @@ public class MiscRecipes {
 			GameRegistry.addRecipe(new ItemStack(Items.golden_horse_armor), "x  ","xyx","xxx", 'x',Items.gold_ingot, 'y',Blocks.wool);
 			GameRegistry.addRecipe(new ItemStack(Items.diamond_horse_armor), "x  ","xyx","xxx", 'x',Items.diamond, 'y',Blocks.wool);
 		//Shapeless
-			//Buckets & Bottles
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.bucket),Items.water_bucket);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.bucket),Items.lava_bucket);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.bucket),Items.milk_bucket);
-			GameRegistry.addShapelessRecipe(new ItemStack(Items.glass_bottle),Items.potionitem);
+			//Buckets & Bottles (Buckets disabled due to a glitch)
+			//GameRegistry.addShapelessRecipe(new ItemStack(Items.bucket),Items.water_bucket);
+			//GameRegistry.addShapelessRecipe(new ItemStack(Items.bucket),Items.lava_bucket);
+			//GameRegistry.addShapelessRecipe(new ItemStack(Items.bucket),Items.milk_bucket);
+			//GameRegistry.addShapelessRecipe(new ItemStack(Items.glass_bottle),Items.potionitem);
 			//Bottle o' Enchanting
 			GameRegistry.addShapelessRecipe(new ItemStack(Items.experience_bottle),Items.glass_bottle,Items.skull);
 		//Smelt

@@ -12,8 +12,6 @@ import java.io.IOException;
 
 import com.carvalho.util.CarvUtil;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 /**

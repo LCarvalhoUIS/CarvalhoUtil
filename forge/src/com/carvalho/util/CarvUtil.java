@@ -9,13 +9,15 @@ package com.carvalho.util;
 
 
 
-import com.carvalho.util.gui.ControlPanelFrame;
 import com.carvalho.util.networking.ClientPacketHandler;
 import com.carvalho.util.networking.ServerPacketHandler;
 import com.carvalho.util.recipes.MiscRecipes;
 import com.carvalho.util.recipes.ShapelessRecipes;
 import com.carvalho.util.recipes.SmeltingRecipes;
+import com.carvalho.util.serverside.CalculateBlocksCommand;
 import com.carvalho.util.serverside.CalculateItemCommand;
+import com.carvalho.util.serverside.GetPlayerDataCommand;
+import com.carvalho.util.serverside.ItemSaturationCommand;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -31,7 +33,6 @@ import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.*;
-import net.minecraftforge.event.world.ChunkDataEvent.Load;
 
 
 /** The main mod class.
@@ -53,9 +54,7 @@ public class CarvUtil
      */
     public static final String networkChannelName="CarvUtil";
     public static FMLEventChannel channel;
-    //Declares the client and server side proxies
-   /* @SidedProxy(clientSide="com.carvalho.util.networking.ClientProxy",
-    			serverSide="com.carvalho.util.networking.CommonProxy")*/
+ 
   
    
    @Instance(MODID)
@@ -83,10 +82,6 @@ public class CarvUtil
     public void preinit(FMLPreInitializationEvent event)
     {
     	//Begin test area
-    	
-    	@SuppressWarnings("unused")
-		ControlPanelFrame frame= new ControlPanelFrame();
-    	//End test area
     	
     	/**
     	 * The config file. Named after the mod
@@ -153,16 +148,17 @@ public class CarvUtil
      	
     	
     }
+   
     /**
      * Client side loader
      * Registers any renderers
      * @param event
      */
+    @EventHandler
     public void Load(FMLInitializationEvent event)
     {
     	//Empty for now
     }
-    
     	
     
     /**
@@ -174,8 +170,10 @@ public class CarvUtil
     public void serverLoad(FMLServerStartingEvent event)
     {
       event.registerServerCommand(new CalculateItemCommand());
+      event.registerServerCommand(new GetPlayerDataCommand());
+      event.registerServerCommand(new CalculateBlocksCommand());
+      event.registerServerCommand(new ItemSaturationCommand());
     }
-   
 }
 
 
