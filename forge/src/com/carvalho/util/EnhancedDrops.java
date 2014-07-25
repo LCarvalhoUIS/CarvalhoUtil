@@ -36,7 +36,6 @@ public class EnhancedDrops {
 	@SubscribeEvent
 	public void DropEnhancedLoot(LivingDeathEvent event)
 	{
-    	new KnowledgeDemonstration();
 
 		//Gets the source of damage and finds the looting modifier
 		Entity source=event.source.getSourceOfDamage();

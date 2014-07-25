@@ -9,8 +9,7 @@ package com.carvalho.util;
 
 
 
-import com.carvalho.util.networking.ClientPacketHandler;
-import com.carvalho.util.networking.ServerPacketHandler;
+import com.carvalho.util.networking.CommonProxy;
 import com.carvalho.util.recipes.MiscRecipes;
 import com.carvalho.util.recipes.ShapelessRecipes;
 import com.carvalho.util.recipes.SmeltingRecipes;
@@ -25,12 +24,12 @@ import net.minecraft.item.Item;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.*;
 
@@ -38,11 +37,11 @@ import net.minecraftforge.common.config.*;
 /** The main mod class.
  * 
  */
-@Mod(modid = CarvUtil.MODID, version = CarvUtil.VERSION)
+@Mod(modid = "CarvUtil",name="CarvUtil", version = "1.3")
 public class CarvUtil
 {
     public static final String MODID = "CarvalhoUtil";
-    public static final String VERSION = "1.2";
+    public static final String VERSION = "1.3";
     
     //Verify the packets come from my channel
     public final static int PACKET_TYPE_ENTITY_SYNC = 2;
@@ -59,7 +58,9 @@ public class CarvUtil
    
    @Instance(MODID)
    public static CarvUtil instance;
-    
+   
+   @SidedProxy(clientSide="com.carvalho.util.networking.ClientProxy",serverSide="com.carvalho.util.networking.CommonProxy")
+    public static CommonProxy proxy;
     
     /**
      * The Creative Mode tab for any blocks/items this class has to offer.
@@ -127,9 +128,9 @@ public class CarvUtil
     public void init(FMLInitializationEvent event)
     {
     	//Starts the network channel
-    	CarvUtil.channel=NetworkRegistry.INSTANCE.newEventDrivenChannel(CarvUtil.networkChannelName);
-    	CarvUtil.channel.register(new ServerPacketHandler());
-    	CarvUtil.channel.register(new ClientPacketHandler());
+    	//CarvUtil.channel=NetworkRegistry.INSTANCE.newEventDrivenChannel(CarvUtil.networkChannelName);
+    	//CarvUtil.channel.register(new ServerPacketHandler());
+    	//CarvUtil.channel.register(new ClientPacketHandler());
     	
     	
     	

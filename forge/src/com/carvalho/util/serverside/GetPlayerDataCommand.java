@@ -17,7 +17,7 @@ import net.minecraft.util.ChatComponentText;
  */
 public class GetPlayerDataCommand implements ICommand {
 	
-	private static final String COMMAND_NAME="GetPlayerDataCommand";
+	private static final String COMMAND_NAME="GetPlayerData";
 
 	public GetPlayerDataCommand() {
 		//Unused
